@@ -186,13 +186,13 @@
                  */
 
                 // if the height of $self is bigger than the window and self isn't already position absolute
-                if (($self.height() + 80  >= $(window).height()) && ($self.css('position') != 'absolute')) {
+                if (($self.height() + opts.verticalOffset >= $(window).height()) && ($self.css('position') != 'absolute')) {
 
                     // we are going to make it positioned where the user can see it, but they can still scroll
                     // so the top offset is based on the user's scroll position.
-                    var topOffset = $(document).scrollTop() + 40;
+                    var topOffset = $(document).scrollTop() + (opts.verticalOffset / 2);
                     $self.css({position: 'absolute', top: topOffset + 'px', marginTop: 0})
-                } else if ($self.height()+ 80  < $(window).height()) {
+                } else if ($self.height() + opts.verticalOffset < $(window).height()) {
                     //if the height is less than the window height, then we're gonna make this thing position: fixed.
                     if (opts.centered) {
                         $self.css({ position: 'fixed', top: '50%', marginTop: ($self.outerHeight() / 2) * -1})
@@ -238,6 +238,7 @@
         classPrefix: 'lb',
         zIndex: 999,
         centered: false,
+        verticalOffset: 80,
         modalCSS: {top: '40px'},
         overlayCSS: {background: 'black', opacity: .3}
     }
