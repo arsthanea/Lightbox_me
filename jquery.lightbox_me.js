@@ -127,6 +127,13 @@
                 } else {
                     $self.add($overlay).hide();
                 }
+                
+                // reset styles
+                $self.css({
+                    'position': '',
+                    'margin': '',
+                    'top': ''
+                });
 
                 //show the hidden parent lightbox
                 if (opts.parentLightbox) {
