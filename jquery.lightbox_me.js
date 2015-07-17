@@ -63,7 +63,7 @@
             if (opts.showOverlay) {
                 setOverlayHeight(); // pulled this into a function because it is called on window resize.
                 $overlay.css({ position: 'absolute', width: '100%', top: 0, left: 0, right: 0, bottom: 0, zIndex: (opts.zIndex + 2), display: 'none' });
-				if (!$overlay.hasClass('lb_overlay_clear')){
+                if (!$overlay.hasClass('lb_overlay_clear')){
                 	$overlay.css(opts.overlayCSS);
                 }
             }
@@ -76,9 +76,11 @@
                 $overlay.fadeIn(opts.overlaySpeed, function() {
                     setSelfPosition();
                     $self[opts.appearEffect](opts.lightboxSpeed, function() { setOverlayHeight(); setSelfPosition(); opts.onLoad()});
+                    $self.addClass(opts.appearClass);
                 });
             } else {
                 setSelfPosition();
+                $self.addClass(opts.appearClass);
                 $self[opts.appearEffect](opts.lightboxSpeed, function() { opts.onLoad()});
             }
 
@@ -144,7 +146,7 @@
                 }
                 $iframe.remove();
 
-				        // clean up events.
+                // clean up events.
                 $self.undelegate(opts.closeSelector, "click");
                 $self.unbind('close', closeLightbox);
                 $self.unbind('repositon', setSelfPosition);
@@ -153,6 +155,7 @@
                 $(window).unbind('resize', setSelfPosition);
                 $(window).unbind('scroll', setSelfPosition);
                 $(window).unbind('keyup.lightbox_me');
+                $self.removeClass(opts.appearClass);
                 opts.onClose();
             }
 
@@ -213,9 +216,6 @@
             }
 
         });
-
-
-
     };
 
     $.fn.lightbox_me.defaults = {
@@ -223,6 +223,7 @@
         // animation
         appearEffect: "fadeIn",
         appearEase: "",
+        appearClass: "visible",
         overlaySpeed: 250,
         lightboxSpeed: 300,
 
@@ -249,4 +250,4 @@
         modalCSS: {top: '40px'},
         overlayCSS: {background: 'black', opacity: .3}
     }
-}))
+}));
