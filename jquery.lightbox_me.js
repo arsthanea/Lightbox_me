@@ -37,6 +37,7 @@
                 opts = $.extend({}, $.fn.lightbox_me.defaults, options),
                 $overlay = $(),
                 $self = $(this),
+                $container = $(this).parent(),
                 $iframe = $('<iframe id="foo" style="z-index: ' + (opts.zIndex + 1) + ';border: none; margin: 0; padding: 0; position: absolute; width: 100%; height: 100%; top: 0; left: 0; filter: mask();"/>');
 
             if (opts.showOverlay) {
@@ -64,7 +65,7 @@
                 setOverlayHeight(); // pulled this into a function because it is called on window resize.
                 $overlay.css({ position: 'absolute', width: '100%', top: 0, left: 0, right: 0, bottom: 0, zIndex: (opts.zIndex + 2), display: 'none' });
                 if (!$overlay.hasClass('lb_overlay_clear')){
-                	$overlay.css(opts.overlayCSS);
+                  $overlay.css(opts.overlayCSS);
                 }
             }
 
@@ -125,11 +126,12 @@
             function closeLightbox() {
                 var s = $self[0].style;
                 if (opts.destroyOnClose) {
-                    $self.add($overlay).remove();
+                    $overlay.remove();
+                    $container.append($self.attr('style', ''));
                 } else {
                     $self.add($overlay).hide();
                 }
-                
+
                 // reset styles
                 $self.css({
                     'position': '',
