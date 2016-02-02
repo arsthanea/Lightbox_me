@@ -1,5 +1,5 @@
 {
   "name" : "lighbox_me",
-  "version" : "2.5",
+  "version" : "2.5.0",
   "main" : "jquery.lightbox_me.js"
 }
